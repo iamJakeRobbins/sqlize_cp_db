@@ -1,0 +1,24 @@
+{
+  "name": "sequelize_db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamJakeRobbins/sqlize_cp_db.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamJakeRobbins/sqlize_cp_db/issues"
+  },
+  "homepage": "https://github.com/iamJakeRobbins/sqlize_cp_db#readme",
+  "dependencies": {
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.32.1"
+  }
+}
