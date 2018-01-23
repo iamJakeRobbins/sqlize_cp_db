@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize';
-import Faker from 'faker';
-import _ from 'lodash';
+var Sequelize = require('sequelize');
+var Faker = require('faker');
+var _ = require('lodash');
 
 
 // db Sequelize Schema
