@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/iamJakeRobbins/sqlize_cp_db#readme",
   "dependencies": {
+    "faker": "^4.1.0",
+    "lodash": "^4.17.4",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.32.1"

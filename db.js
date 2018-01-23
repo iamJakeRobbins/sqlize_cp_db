@@ -1,4 +1,6 @@
 import Sequelize from 'sequelize';
+import Faker from 'faker';
+import _ from 'lodash';
 
 
 // db Sequelize Schema
@@ -28,7 +30,7 @@ const Quote = Conn.define('quote', {
 		type: Sequelize.STRING,
 		allowNull : false
 	},
-	attribution: {
+	author: {
 		type: sequlize.STRING,
 		allowNull: false
 	},
@@ -47,6 +49,7 @@ const Quote = Conn.define('quote', {
 const Interpretation = Conn.define('interpretation', {
 	body: {
 		type: Sequelize.STRING,
+		author: Sequelize.STRING,
 		allowNull : false
 	}
 });
@@ -54,6 +57,7 @@ const Interpretation = Conn.define('interpretation', {
 const Critique = Conn.define('critique', {
 	body: {
 		type: Sequelize.STRING,
+		author: Sequelize.STRING
 		allowNull: false
 	}
 });
@@ -70,6 +74,26 @@ Interpretation.belongsTo(Quote);
 
 Interpretation.hasMany(Critique);
 Critique.belongsTo(Interpretation);
+
+//spoof some data
+Conn.sync({ force: true }).then(()=> {
+  _.times(15, ()=> {
+    return User.create({
+      login: Faker.name.findName(),
+      password: Faker.lorem.word(),
+    }).then(user => {
+      return User.createInterpretation({
+        body: 'I find this quote to be very quotable'
+				author: `${user.login}`
+      });
+    }).then(interpretation => {
+			return Quote.create({
+				body:  Faker.lorgem.sentence()
+				author: Faker.name.findName()
+			})
+		})
+  });
+});
 
 
 export default Conn;
