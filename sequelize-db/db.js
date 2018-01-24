@@ -5,9 +5,9 @@ var _ = require('lodash');
 
 // db Sequelize Schema
 const Conn = new Sequelize(
-	'capstone2',
-	'postgres',
-	'postgres',
+ 'capstone2',
+ null,
+ null,
 		{
 			dialect: 'postgres',
 			host: 'localhost'
@@ -31,7 +31,7 @@ const Quote = Conn.define('quote', {
 		allowNull : false
 	},
 	author: {
-		type: sequlize.STRING,
+		type: Sequelize.STRING,
 		allowNull: false
 	},
 	featured: {
@@ -40,7 +40,7 @@ const Quote = Conn.define('quote', {
 		defaultValue: false
 	},
 	beenFeatured: {
-		type: Sequlize.BOOLEAN,
+		type: Sequelize.BOOLEAN,
 		allowNull: false,
 		defaultValue: false,
 	}
@@ -49,15 +49,18 @@ const Quote = Conn.define('quote', {
 const Interpretation = Conn.define('interpretation', {
 	body: {
 		type: Sequelize.STRING,
-		author: Sequelize.STRING,
 		allowNull : false
+	},
+	author: {
+		type: Sequelize.STRING,
+		allowNull: false
 	}
 });
 
 const Critique = Conn.define('critique', {
 	body: {
 		type: Sequelize.STRING,
-		author: Sequelize.STRING
+		author: Sequelize.STRING,
 		allowNull: false
 	}
 });
@@ -81,19 +84,23 @@ Conn.sync({ force: true }).then(()=> {
     return User.create({
       login: Faker.name.findName(),
       password: Faker.lorem.word(),
-    }).then(user => {
-      return User.createInterpretation({
-        body: 'I find this quote to be very quotable'
-				author: `${user.login}`
+    })
+		.then(user => {
+				return Quote.create({
+					body:  Faker.lorem.sentence(),
+					author: Faker.name.findName(),
+				})
+		.then(quote => {
+    	return Interpretation.create({
+      	body: faker.lorem.sentence(),
+				author: `${user.login}`,
+				userId: `${user.id}`,
+				quoteId: `${quote.id}`
       });
-    }).then(interpretation => {
-			return Quote.create({
-				body:  Faker.lorgem.sentence()
-				author: Faker.name.findName()
-			})
-		})
+    })
+	})
   });
 });
 
 
-export default Conn;
+module.exports = Conn
