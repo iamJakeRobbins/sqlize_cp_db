@@ -60,8 +60,11 @@ const Interpretation = Conn.define('interpretation', {
 const Critique = Conn.define('critique', {
 	body: {
 		type: Sequelize.STRING,
-		author: Sequelize.STRING,
 		allowNull: false
+	},
+	author: {
+		type : Sequelize.STRING,
+		allowNull : false
 	}
 });
 
@@ -92,7 +95,7 @@ Conn.sync({ force: true }).then(()=> {
 				})
 		.then(quote => {
     	return Interpretation.create({
-      	body: faker.lorem.sentence(),
+      	body: Faker.lorem.sentence(),
 				author: `${user.login}`,
 				userId: `${user.id}`,
 				quoteId: `${quote.id}`

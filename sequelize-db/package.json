@@ -6,11 +6,17 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "apollo-client-preset": "^1.0.6",
+    "babel-preset-node5": "^12.0.1",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "express-graphql": "^0.6.11",
     "faker": "^4.1.0",
+    "graphiql": "^0.11.11",
+    "graphql": "^0.12.3",
+    "graphql-tag": "^2.6.1",
     "hbs": "~4.0.1",
     "lodash": "^4.17.4",
     "morgan": "~1.9.0",
@@ -18,5 +24,8 @@
     "react-dom": "^16.2.0",
     "sequelize": "^4.32.1",
     "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
   }
 }
